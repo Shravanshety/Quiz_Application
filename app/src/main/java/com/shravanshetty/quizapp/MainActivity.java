@@ -1,6 +1,8 @@
 package com.shravanshetty.quizapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,5 +27,31 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         toolbar = findViewById(R.id.toolbar);
+    }
+
+    public void java(View view) {
+        startActivity(new Intent(MainActivity.this,QuestionActivity.class));
+        finish();
+    }
+
+    public void kotlin(View view) {
+    }
+
+    public void python(View view) {
+    }
+
+    public void cpp(View view) {
+    }
+
+    public void dart(View view) {
+    }
+
+    public void sql(View view) {
+    }
+
+    public void xml(View view) {
+    }
+
+    public void c(View view) {
     }
 }
