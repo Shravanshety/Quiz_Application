@@ -15,32 +15,33 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class QuestionActivity extends AppCompatActivity {
+public class QuestionActivityKotlin extends AppCompatActivity {
+
     int flag=0;
     int marks = 0;
-     public static int correct=0;
+    public static int correct=0;
     public static int wrong=0;
     String[] questions ={
-            "What is the size of an int data type in Java?",
-            "Which of the following is the correct way to start the execution of a Java application?",
-            "Which keyword is used to create an object in Java?",
-            "What will the expression 5 + 2 * 3 evaluate to in Java?",
-            "Which of the following is not a Java access modifier?"
+            "What is the default visibility modifier in Kotlin?",
+            "Which keyword is used to declare a variable that cannot be reassigned in Kotlin?",
+            "Which function is the entry point of a Kotlin application?",
+            "What is the correct way to define a function in Kotlin?",
+            "Which of the following is used to handle null safety in Kotlin?"
     };
     String[] options={
-            "2 bytes","4 bytes","8 bytes"," Depends on the system",
-            "public static void start(String[] args)","public static void run(String[] args)","public static void main(String[] args)","public static main(String[] args)",
-            "build","new","create","make",
-            "21","11","15","17",
-            "public","private","protected","friendly"
+            "public", "internal", "private", "protected",
+            "val", "var", "const", "final",
+            "start()", "run()", "main()", "begin()",
+            "fun myFunction() {}", "function myFunction() {}", "def myFunction() {}", "void myFunction() {}",
+            "Optional", "null", "?", "!!"
 
     };
     String[] answers = {
-            "4 bytes",
-            "public static void main(String[] args)",
-            "new",
-            "11",
-            "friendly"
+            "public",
+            "val",
+            "main()",
+            "fun myFunction() {}",
+            "?"
     };
     TextView quitBtn,dispNo,score,question;
     Button next;
@@ -51,7 +52,7 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_question);
+        setContentView(R.layout.activity_question_kotlin);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -78,7 +79,7 @@ public class QuestionActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(radio_g.getCheckedRadioButtonId() == -1){
-                    Toast.makeText(QuestionActivity.this,"Please select an option",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QuestionActivityKotlin.this,"Please select an option",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 RadioButton uAnswer = findViewById(radio_g.getCheckedRadioButtonId());
@@ -86,10 +87,10 @@ public class QuestionActivity extends AppCompatActivity {
 
                 if(ansText.equals(answers[flag])){
                     correct++;
-                    Toast.makeText(QuestionActivity.this,"Hurry!! it was correct",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QuestionActivityKotlin.this,"Hurry!! it was correct",Toast.LENGTH_SHORT).show();
                 }else{
                     wrong++;
-                    Toast.makeText(QuestionActivity.this,"ohh!! it was incorrect",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QuestionActivityKotlin.this,"ohh!! it was incorrect",Toast.LENGTH_SHORT).show();
                 }
                 flag++;
                 if(score!=null){
@@ -104,7 +105,7 @@ public class QuestionActivity extends AppCompatActivity {
                         dispNo.setText(flag+1+"/"+questions.length);
                     }else{
                         marks=correct;
-                        Intent intent =new Intent(QuestionActivity.this,ResultActivity.class);
+                        Intent intent =new Intent(QuestionActivityKotlin.this,ResultActivity.class);
                         intent.putExtra("attempted",flag);
                         intent.putExtra("correct",correct);
                         intent.putExtra("wrong",wrong);
@@ -120,7 +121,7 @@ public class QuestionActivity extends AppCompatActivity {
         quitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(QuestionActivity.this,ResultActivity.class);
+                Intent intent=new Intent(QuestionActivityKotlin.this,ResultActivity.class);
                 intent.putExtra("attempted",flag);
                 intent.putExtra("correct",correct);
                 intent.putExtra("wrong",wrong);

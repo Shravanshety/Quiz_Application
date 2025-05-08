@@ -13,6 +13,27 @@
         android:theme="@style/Theme.QuizApp"
         tools:targetApi="31">
         <activity
+            android:name=".QuestionActivityC"
+            android:exported="false" />
+        <activity
+            android:name=".QuestionActivityXml"
+            android:exported="false" />
+        <activity
+            android:name=".QuestionActivitySql"
+            android:exported="false" />
+        <activity
+            android:name=".QuestionActivityDart"
+            android:exported="false" />
+        <activity
+            android:name=".QuestionActivityCpp"
+            android:exported="false" />
+        <activity
+            android:name=".QuestionActivityPython"
+            android:exported="false" />
+        <activity
+            android:name=".QuestionActivityKotlin"
+            android:exported="false" />
+        <activity
             android:name=".ResultActivity"
             android:exported="false" />
         <activity

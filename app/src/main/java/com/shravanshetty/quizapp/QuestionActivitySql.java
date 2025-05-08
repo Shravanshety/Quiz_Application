@@ -15,32 +15,33 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class QuestionActivity extends AppCompatActivity {
+public class QuestionActivitySql extends AppCompatActivity {
+
     int flag=0;
     int marks = 0;
-     public static int correct=0;
+    public static int correct=0;
     public static int wrong=0;
     String[] questions ={
-            "What is the size of an int data type in Java?",
-            "Which of the following is the correct way to start the execution of a Java application?",
-            "Which keyword is used to create an object in Java?",
-            "What will the expression 5 + 2 * 3 evaluate to in Java?",
-            "Which of the following is not a Java access modifier?"
+            "Which SQL statement is used to retrieve data from a database?",
+            "What keyword is used to sort the result-set in SQL?",
+            "Which SQL clause is used to filter records?",
+            "What does the SQL COUNT() function do?",
+            "Which command is used to remove a table from a database in SQL?"
     };
     String[] options={
-            "2 bytes","4 bytes","8 bytes"," Depends on the system",
-            "public static void start(String[] args)","public static void run(String[] args)","public static void main(String[] args)","public static main(String[] args)",
-            "build","new","create","make",
-            "21","11","15","17",
-            "public","private","protected","friendly"
+            "GET", "SELECT", "EXTRACT", "FETCH",
+            "ORDER", "SORT BY", "ORDER BY", "ARRANGE",
+            "WHERE", "IF", "FILTER", "HAVING",
+            "Counts rows", "Counts columns", "Counts tables", "Counts keys",
+            "DELETE", "DROP", "REMOVE", "ERASE"
 
     };
     String[] answers = {
-            "4 bytes",
-            "public static void main(String[] args)",
-            "new",
-            "11",
-            "friendly"
+            "SELECT",
+            "ORDER BY",
+            "WHERE",
+            "Counts rows",
+            "DROP"
     };
     TextView quitBtn,dispNo,score,question;
     Button next;
@@ -51,7 +52,7 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_question);
+        setContentView(R.layout.activity_question_sql);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -78,7 +79,7 @@ public class QuestionActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(radio_g.getCheckedRadioButtonId() == -1){
-                    Toast.makeText(QuestionActivity.this,"Please select an option",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QuestionActivitySql.this,"Please select an option",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 RadioButton uAnswer = findViewById(radio_g.getCheckedRadioButtonId());
@@ -86,10 +87,10 @@ public class QuestionActivity extends AppCompatActivity {
 
                 if(ansText.equals(answers[flag])){
                     correct++;
-                    Toast.makeText(QuestionActivity.this,"Hurry!! it was correct",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QuestionActivitySql.this,"Hurry!! it was correct",Toast.LENGTH_SHORT).show();
                 }else{
                     wrong++;
-                    Toast.makeText(QuestionActivity.this,"ohh!! it was incorrect",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QuestionActivitySql.this,"ohh!! it was incorrect",Toast.LENGTH_SHORT).show();
                 }
                 flag++;
                 if(score!=null){
@@ -104,7 +105,7 @@ public class QuestionActivity extends AppCompatActivity {
                         dispNo.setText(flag+1+"/"+questions.length);
                     }else{
                         marks=correct;
-                        Intent intent =new Intent(QuestionActivity.this,ResultActivity.class);
+                        Intent intent =new Intent(QuestionActivitySql.this,ResultActivity.class);
                         intent.putExtra("attempted",flag);
                         intent.putExtra("correct",correct);
                         intent.putExtra("wrong",wrong);
@@ -120,7 +121,7 @@ public class QuestionActivity extends AppCompatActivity {
         quitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(QuestionActivity.this,ResultActivity.class);
+                Intent intent=new Intent(QuestionActivitySql.this,ResultActivity.class);
                 intent.putExtra("attempted",flag);
                 intent.putExtra("correct",correct);
                 intent.putExtra("wrong",wrong);

@@ -35,23 +35,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void kotlin(View view) {
+        startActivity(new Intent(MainActivity.this,QuestionActivityKotlin.class));
+        finish();
     }
 
     public void python(View view) {
+        startActivity(new Intent(MainActivity.this,QuestionActivityPython.class));
+        finish();
     }
 
     public void cpp(View view) {
+        startActivity(new Intent(MainActivity.this,QuestionActivityCpp.class));
+        finish();
     }
 
     public void dart(View view) {
+        startActivity(new Intent(MainActivity.this,QuestionActivityDart.class));
+        finish();
+
     }
 
     public void sql(View view) {
+        startActivity(new Intent(MainActivity.this,QuestionActivitySql.class));
+        finish();
     }
 
     public void xml(View view) {
+        startActivity(new Intent(MainActivity.this,QuestionActivityXml.class));
+        finish();
     }
 
     public void c(View view) {
+        startActivity(new Intent(MainActivity.this,QuestionActivityC.class));
+        finish();
     }
 }

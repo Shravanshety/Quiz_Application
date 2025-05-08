@@ -27,6 +27,7 @@ public class ResultActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+
         });
         correct =findViewById(R.id.correct);
         wrong =findViewById(R.id.wrong);
@@ -44,6 +45,10 @@ public class ResultActivity extends AppCompatActivity {
         wrong.setText("Wrong :"+wrong1);
         total.setText("Attempted:"+attempted1);
         result.setText(correct1+"/"+attempted1);
+
+
+        QuestionActivity.correct = 0;
+        QuestionActivity.wrong = 0;
 
         //too switch from one page to another
         home.setOnClickListener(new View.OnClickListener() {
