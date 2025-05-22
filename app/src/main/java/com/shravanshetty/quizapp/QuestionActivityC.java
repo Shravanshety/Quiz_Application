@@ -1,6 +1,7 @@
 package com.shravanshetty.quizapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,26 +16,31 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class QuestionActivityC extends AppCompatActivity {
 
-    int flag=0;
+    int flag = 0;
     int marks = 0;
-    public static int correct=0;
-    public static int wrong=0;
-    String[] questions ={
+    public static int correct = 0;
+    public static int wrong = 0;
+    String quizTopic = "Unknown";  // Topic variable to store quiz topic
+
+    String[] questions = {
             "Which of the following is used to declare a variable in C?",
             "What is the correct syntax to print something in C?",
             "Which header file is required for using printf()?",
             "What is the size of an int data type (typically) in C?",
             "Which of the following is the correct way to start the main function in C?"
     };
-    String[] options={
+    String[] options = {
             "int x;", "declare x;", "var x;", "let x;",
             "System.out.println()", "echo()", "print()", "printf()",
             "stdio.h", "conio.h", "iostream", "stdlib.h",
             "2 bytes", "4 bytes", "8 bytes", "Depends on the system",
             "main()", "int main()", "void Main()", "start()"
-
     };
     String[] answers = {
             "int x;",
@@ -43,10 +49,11 @@ public class QuestionActivityC extends AppCompatActivity {
             "4 bytes",
             "int main()"
     };
-    TextView quitBtn,dispNo,score,question;
+
+    TextView quitBtn, dispNo, score, question;
     Button next;
     RadioGroup radio_g;
-    RadioButton rb1,rb2,rb3,rb4;
+    RadioButton rb1, rb2, rb3, rb4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,78 +65,95 @@ public class QuestionActivityC extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        quitBtn=findViewById(R.id.quitBtn);
-        score=findViewById(R.id.score);
-        dispNo=findViewById(R.id.dispNo);
-        next=findViewById(R.id.nextBtn);
-        radio_g=findViewById(R.id.answerGroup);
-        question=findViewById(R.id.question);
-        rb1=findViewById(R.id.radioBtn1);
-        rb2=findViewById(R.id.radioBtn2);
-        rb3=findViewById(R.id.radioBtn3);
-        rb4=findViewById(R.id.radioBtn4);
+
+        // Get the quiz topic passed from the previous activity
+        quizTopic = getIntent().getStringExtra("topic");  // Retrieve topic passed via Intent
+        if (quizTopic == null) {
+            quizTopic = "Unknown";  // Set default if no topic was passed
+        }
+
+        quitBtn = findViewById(R.id.quitBtn);
+        score = findViewById(R.id.score);
+        dispNo = findViewById(R.id.dispNo);
+        next = findViewById(R.id.nextBtn);
+        radio_g = findViewById(R.id.answerGroup);
+        question = findViewById(R.id.question);
+        rb1 = findViewById(R.id.radioBtn1);
+        rb2 = findViewById(R.id.radioBtn2);
+        rb3 = findViewById(R.id.radioBtn3);
+        rb4 = findViewById(R.id.radioBtn4);
 
         question.setText(questions[flag]);
         rb1.setText(options[0]);
         rb2.setText(options[1]);
         rb3.setText(options[2]);
         rb4.setText(options[3]);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                if(radio_g.getCheckedRadioButtonId() == -1){
-                    Toast.makeText(QuestionActivityC.this,"Please select an option",Toast.LENGTH_SHORT).show();
-                    return;
+        next.setOnClickListener(view -> {
+
+            if (radio_g.getCheckedRadioButtonId() == -1) {
+                Toast.makeText(QuestionActivityC.this, "Please select an option", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            RadioButton uAnswer = findViewById(radio_g.getCheckedRadioButtonId());
+            String ansText = uAnswer.getText().toString();
+
+            if (ansText.equals(answers[flag])) {
+                correct++;
+                Toast.makeText(QuestionActivityC.this, "Hurry!! it was correct", Toast.LENGTH_SHORT).show();
+            } else {
+                wrong++;
+                Toast.makeText(QuestionActivityC.this, "ohh!! it was incorrect", Toast.LENGTH_SHORT).show();
+            }
+
+            flag++;
+            if (score != null) {
+                score.setText(String.valueOf(correct));
+                if (flag < questions.length) {
+                    question.setText(questions[flag]);
+                    rb1.setText(options[flag * 4]);
+                    rb2.setText(options[flag * 4 + 1]);
+                    rb3.setText(options[flag * 4 + 2]);
+                    rb4.setText(options[flag * 4 + 3]);
+                    dispNo.setText((flag + 1) + "/" + questions.length);
+                } else {
+                    saveQuizHistory(quizTopic, correct, flag);  // Save history with correct topic
+                    Intent intent = new Intent(QuestionActivityC.this, ResultActivity.class);
+                    intent.putExtra("attempted", flag);
+                    intent.putExtra("correct", correct);
+                    intent.putExtra("wrong", wrong);
+                    startActivity(intent);
+                    finish();
                 }
-                RadioButton uAnswer = findViewById(radio_g.getCheckedRadioButtonId());
-                String ansText = uAnswer.getText().toString();
-
-                if(ansText.equals(answers[flag])){
-                    correct++;
-                    Toast.makeText(QuestionActivityC.this,"Hurry!! it was correct",Toast.LENGTH_SHORT).show();
-                }else{
-                    wrong++;
-                    Toast.makeText(QuestionActivityC.this,"ohh!! it was incorrect",Toast.LENGTH_SHORT).show();
-                }
-                flag++;
-                if(score!=null){
-                    score.setText(""+correct);
-                    if(flag<questions.length){
-                        question.setText(questions[flag]);
-                        rb1.setText(options[flag*4]);
-                        rb2.setText(options[flag*4+1]);
-                        rb3.setText(options[flag*4+2]);
-                        rb4.setText(options[flag*4+3]);
-
-                        dispNo.setText(flag+1+"/"+questions.length);
-                    }else{
-                        marks=correct;
-                        Intent intent =new Intent(QuestionActivityC.this,ResultActivity.class);
-                        intent.putExtra("attempted",flag);
-                        intent.putExtra("correct",correct);
-                        intent.putExtra("wrong",wrong);
-                        startActivity(intent);
-                        finish();
-
-                    }
-                    radio_g.clearCheck();
-                }
-
+                radio_g.clearCheck();
             }
         });
-        quitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(QuestionActivityC.this,ResultActivity.class);
-                intent.putExtra("attempted",flag);
-                intent.putExtra("correct",correct);
-                intent.putExtra("wrong",wrong);
-                QuestionActivity.correct = 0;
-                QuestionActivity.wrong = 0;
-                startActivity(intent);
-                finish();
-            }
+
+        quitBtn.setOnClickListener(v -> {
+            saveQuizHistory(quizTopic, correct, flag);  // Save history with correct topic
+            Intent intent = new Intent(QuestionActivityC.this, ResultActivity.class);
+            intent.putExtra("attempted", flag);
+            intent.putExtra("correct", correct);
+            intent.putExtra("wrong", wrong);
+            correct = 0;
+            wrong = 0;
+            startActivity(intent);
+            finish();
         });
+    }
+
+    private void saveQuizHistory(String topic, int score, int totalQuestions) {
+        SharedPreferences prefs = getSharedPreferences("quiz_history", MODE_PRIVATE);
+        String oldHistory = prefs.getString("history", "");
+        String timestamp = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()).format(new Date());
+
+        String newEntry = "Topic: " + topic +
+                " | Score: " + score + "/" + totalQuestions +
+                " | Date: " + timestamp + "\n";
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("history", oldHistory + newEntry);
+        editor.apply();
     }
 }

@@ -105,15 +105,15 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="120dp"
+                                android:layout_width="130dp"
                                 android:layout_height="120dp"
-                                android:src="@drawable/java" />
+                                android:src="@drawable/java1" />
 
                             <TextView
                                 android:id="@+id/javaText"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="java"
+                                android:text="Java"
                                 android:textColor="@color/black"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
@@ -140,10 +140,11 @@
 
                             <ImageView
                                 android:id="@+id/kotlinImage"
-                                android:layout_marginTop="20dp"
-                                android:layout_width="100dp"
+                                android:layout_width="120dp"
                                 android:layout_height="100dp"
-                                android:src="@drawable/kotlin"/>
+                                android:layout_marginTop="20dp"
+                                android:src="@drawable/kotlin1" />
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -190,7 +191,7 @@
                                 android:layout_marginTop="20dp"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:src="@drawable/python" />
+                                android:src="@drawable/python2" />
 
                             <TextView
                                 android:id="@+id/pythonText"
@@ -226,7 +227,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
                                 android:layout_marginTop="20dp"
-                                android:src="@drawable/cplus" />
+                                android:src="@drawable/cpp1" />
 
                             <TextView
                                 android:id="@+id/cppText"
@@ -261,7 +262,7 @@
                         android:layout_height="150dp"
                         android:layout_marginEnd="5dp"
                         android:layout_weight="1"
-                        android:backgroundTint="#949191"
+                        android:backgroundTint="#B8B8B8"
                         app:cardCornerRadius="10dp">
 
                         <LinearLayout
@@ -275,7 +276,7 @@
                                 android:id="@+id/dartImage"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:src="@drawable/dart" />
+                                android:src="@drawable/dart1" />
 
                             <TextView
                                 android:id="@+id/dartText"
@@ -297,7 +298,7 @@
                         android:layout_height="150dp"
                         android:layout_marginStart="5dp"
                         android:layout_weight="1"
-                        android:backgroundTint="#878686"
+                        android:backgroundTint="#B8B8B8"
                         app:cardCornerRadius="10dp">
 
                         <LinearLayout
@@ -311,7 +312,7 @@
                                 android:layout_marginTop="20dp"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:src="@drawable/sql" />
+                                android:src="@drawable/sql1" />
 
                             <TextView
                                 android:id="@+id/sqlText"
@@ -346,7 +347,7 @@
                         android:layout_height="150dp"
                         android:layout_marginEnd="5dp"
                         android:layout_weight="1"
-                        android:backgroundTint="#BAB9B9"
+                        android:backgroundTint="#B8B8B8"
                         app:cardCornerRadius="10dp">
 
                         <LinearLayout
@@ -359,7 +360,7 @@
                                 android:id="@+id/xmlImage"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:src="@drawable/xml" />
+                                android:src="@drawable/xml1" />
 
                             <TextView
                                 android:id="@+id/xmlText"
@@ -381,7 +382,7 @@
                         android:layout_height="150dp"
                         android:layout_marginStart="5dp"
                         android:layout_weight="1"
-                        android:backgroundTint="#BAB9B9"
+                        android:backgroundTint="#B8B8B8"
                         app:cardCornerRadius="10dp">
 
                         <LinearLayout
@@ -394,7 +395,7 @@
                                 android:id="@+id/cImage"
                                 android:layout_width="110dp"
                                 android:layout_height="110dp"
-                                android:src="@drawable/c" />
+                                android:src="@drawable/c1" />
 
                             <TextView
                                 android:id="@+id/cText"

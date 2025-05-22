@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D8FF9800"
+    android:background="#DAFF9800"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".QuestionActivity">
@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/quitBtn"
-            android:layout_width="323dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:text="QUIT"

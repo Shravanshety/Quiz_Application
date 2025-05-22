@@ -1,6 +1,7 @@
 package com.shravanshetty.quizapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class ResultActivity extends AppCompatActivity {
     TextView correct,wrong,total,result;
@@ -58,6 +63,12 @@ public class ResultActivity extends AppCompatActivity {
                 finishAffinity();
             }
         });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ResultActivity.this, MainActivity.class));
+                finishAffinity();
+            }
+        });
 
-    }
-}
+}}
